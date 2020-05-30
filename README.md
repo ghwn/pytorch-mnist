@@ -23,3 +23,10 @@
     $ python evaluate.py \
         --model_path="models/mnist_cnn.pt" \
         --batch_size=50
+
+
+## Prediction
+
+    $ python predict.py \
+        --model_path="models/mnist_cnn.pt" \
+        --image=<path/to/image>
