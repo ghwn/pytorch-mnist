@@ -33,8 +33,14 @@ class DigitPredictor:
         image = Image.open(f)
         return image
 
-    def image_bytes_to_tensor(self, image_bytes):
-        """Preprocesses image bytes.
+    def _transform(self, image):
+        """Transforms the image to torch.Tensor."""
+        tensor = torchvision.transforms.ToTensor()(image)
+        tensor = torchvision.transforms.Normalize(mean=(0.1307,), std=(0.3081,))(tensor)
+        return tensor
+
+    def _preprocess(self, image_bytes):
+        """Preprocesses image bytes so that they can be input into the model.
 
         Returns:
             - a torch.Tensor of which shape is [1, 1, 28, 28].
@@ -43,14 +49,13 @@ class DigitPredictor:
         image = self._to_jpeg(image, mode='L')  # 'L' for grayscale
         image = image.resize(size=(28, 28))
         image = np.array(image, dtype=np.uint8)
-        tensor = torchvision.transforms.ToTensor()(image)
-        tensor = torchvision.transforms.Normalize(mean=(0.1307,), std=(0.3081,))(tensor)
+        tensor = self._transform(image)
         tensor = tensor.unsqueeze(0)
         return tensor
 
     def predict(self, image_bytes):
         """Predicts a digit the image represents."""
-        tensor = self.image_bytes_to_tensor(image_bytes)
+        tensor = self._preprocess(image_bytes)
         output = self.model(tensor.to(self.device))
         prediction = output.argmax().item()
         return prediction
