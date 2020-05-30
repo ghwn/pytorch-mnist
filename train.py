@@ -46,7 +46,7 @@ def train(train_batch_size, test_batch_size, epochs, lr, output_model_name, log_
     train_loader = get_mnist_data_loader(train=True, batch_size=train_batch_size)
     test_loader = get_mnist_data_loader(train=False, batch_size=test_batch_size)
     
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = MnistNetwork().to(device)
     optimizer = torch.optim.Adam(
         params=model.parameters(),
