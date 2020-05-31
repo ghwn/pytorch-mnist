@@ -44,4 +44,6 @@
 
         $ python server.py \
             --model_path="./models/mnist_cnn.pt" \
+            --host="localhost" \
+            --port=50051 \
             --max_workers=1
