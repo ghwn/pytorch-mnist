@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service DigitClassification {
+    rpc predict(Image) returns (Prediction) {}
+}
+
+message Image {
+    bytes data = 1;
+}
+
+message Prediction {
+    int32 data = 1;
+}

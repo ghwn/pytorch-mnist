@@ -30,3 +30,10 @@
     $ python predict.py \
         --model_path="models/mnist_cnn.pt" \
         --image=<path/to/image>
+
+
+## Running gRPC Server
+
+To use this server, you have to also implement its client satisfying `digit_classification.proto`.
+
+    $ python server.py --model_path="./models/mnist_cnn.pt"
