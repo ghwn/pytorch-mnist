@@ -34,6 +34,12 @@
 
 ## Running gRPC Server
 
-To use this server, you have to also implement its client satisfying `digit_classification.proto`.
+1. Generate Python code from `digit_classification.proto`, which provide gRPC server and client interfaces.
 
-    $ python server.py --model_path="./models/mnist_cnn.pt"
+        $ python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./digit_classification.proto
+
+2. Run server example.
+
+    To use this server, you have to also implement its client satisfying `digit_classification.proto`.
+
+        $ python server.py --model_path="./models/mnist_cnn.pt"
