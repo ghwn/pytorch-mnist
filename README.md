@@ -42,4 +42,6 @@
 
     To use this server, you have to also implement its client satisfying `digit_classification.proto`.
 
-        $ python server.py --model_path="./models/mnist_cnn.pt"
+        $ python server.py \
+            --model_path="./models/mnist_cnn.pt" \
+            --max_workers=1
